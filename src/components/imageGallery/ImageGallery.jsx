@@ -1,21 +1,43 @@
 import React from 'react';
-import { ImageGalleryItem } from '../imageGalleryItem/ImageGalleryItem';
-import { Gallery } from './imageGalleryStyle';
+import ImageGalleryItem from 'components/imageGalleryItem/ImageGalleryItem';
 
-export const ImageGallery = ({ photosGallery, identifyImg }) => {
+
+
+import {
+ Gallery
+} from './imageGalleryStyle'
+
+
+
+const ImageGallery = ({ images, handleImageClick }) => {
+
+
   return (
-    <Gallery onClick={(e) => {identifyImg(e)}}>
-      {photosGallery?.map(item => (
-        <ImageGalleryItem
-          key={item.id}
-          source={item.webformatURL}
-          largeImage={item.largeImageURL}
-          text={item.tags}
-        ></ImageGalleryItem>
+    
+
+
+    <Gallery>
+      {images.map((image, index) => (
+
+        
+        
+          <ImageGalleryItem
+          key={`${image.id}_${index}`}
+          image={image}
+          handleImageClick={handleImageClick}
+        />
+        
+
+        
+        
       ))}
     </Gallery>
+
+
+
+
+
+
   );
 };
-
-
-// ImageGallery.jsx
+export default ImageGallery;

@@ -16,9 +16,9 @@ const SearchBar = ({ keyword, setKeyword, handleSearch }) => {
         type="text"
         value={keyword}
         onChange={e => setKeyword(e.target.value)}
-        placeholder="Enter keyword"
+        placeholder="Search images and photos"
         />
-      <button onClick={handleSearch}>Search</button>
+      <SearchButton onClick={handleSearch}>Search</SearchButton>
     </HeaderConteiner>
         </Header>
   );

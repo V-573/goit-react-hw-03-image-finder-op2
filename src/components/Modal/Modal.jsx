@@ -3,10 +3,9 @@ import React from 'react';
 
 export const Modal=({ imageUrl, onClose }) => {
     return (
-        <Overlay>
+        <Overlay onClick={onClose}>
              <ModalImage>
-                {/* <span className="close" onClick={onClose}>&times;</span> */}
-                <img src={imageUrl} alt="Modal" width="100%"/>
+                <img src={imageUrl} alt="Modal" height={"500px"} />
           </ModalImage>
         </Overlay>
     );

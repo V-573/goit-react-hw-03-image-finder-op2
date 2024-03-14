@@ -12,11 +12,21 @@ export const Overlay = styled.div`
     height: 100vh;
 
     display: flex;
-    place-content: center;
+    justify-content: center;
     align-items: center;
 `
 
 export const ModalImage = styled.div`
-    width: 50%;
-    
-`
+    max-width: 90vw; /* Establece el ancho máximo al 90% del ancho de la ventana del navegador */
+    max-height: 90vh; /* Establece la altura máxima al 90% del alto de la ventana del navegador */
+    overflow: hidden; /* Evita que la imagen sobresalga del contenedor */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+     
+`;
+
+export const ModalImg = styled.img`
+  object-fit: contain; /* Hace que la imagen se ajuste dentro del contenedor sin recortarla */
+
+`;

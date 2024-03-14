@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Modal from './Modal/Modal';
 import { searchImages } from 'services/photosApi';
 import SearchBar from './searchBar/Searchbar';
+import ImageGallery from './imageGallery/ImageGallery';
+import ButtonLoad from './button/ButtonLoad';
+
 
 function App() {
   const [keyword, setKeyword] = useState('');
@@ -27,7 +30,9 @@ function App() {
 
   const handleSearch = () => {
     searchImages(keyword, page, setImages);
-       setShowLoadMore(true); 
+    setShowLoadMore(true); 
+    
+
   };
 
   const handleImageClick = imageUrl => {
@@ -39,21 +44,23 @@ function App() {
     setModalOpen(false);
   };
 
-  const loadMore = () => {
-  // Incrementa la página para cargar más imágenes
-  let nextPage = page + 1;
+const loadMore = () => {
+      // Incrementa la página para cargar más imágenes
+      let nextPage = page + 1;
 
-  // Realiza la búsqueda de más imágenes
-  searchImages(keyword, nextPage, newImages => {
-    // Combina las imágenes actuales con las nuevas imágenes cargadas
-    let updatedImages = [...images, ...newImages];
-    
-    // Actualiza el estado de las imágenes con las nuevas imágenes cargadas
-    setImages(updatedImages);
-    
-    // Actualiza la página actual
-    setPage(nextPage);
-  });
+      // Realiza la búsqueda de más imágenes
+      searchImages(keyword, nextPage, newImages => {
+        // Combina las imágenes actuales con las nuevas imágenes cargadas
+        let updatedImages = [...images, ...newImages];
+        
+        // Actualiza el estado de las imágenes con las nuevas imágenes cargadas
+        setImages(updatedImages);
+        
+        // Actualiza la página actual
+        setPage(nextPage);
+      });
+  
+  
 };
 
   return (
@@ -64,23 +71,11 @@ function App() {
         handleSearch={handleSearch}
       />
 
-      <div
-        style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}
-      >
-        {images.map((image, index) => (
-          <div key={`${image.id}_${index}`} style={{ margin: '10px' }}>
-            <img
-              src={image.webformatURL}
-              alt="Pixabay"
-              style={{ width: '350px', height: '200px' }}
-              onClick={() => handleImageClick(image.largeImageURL)}
-            />
-          </div>
-        ))}
+      {/* Usa el componente ImageGallery */}
+      <ImageGallery images={images} handleImageClick={handleImageClick} />
 
-         {/* <button onClick={loadMore}> load more</button>   */}
-      </div>
-{showLoadMore && <button onClick={loadMore}>Load More</button>} {/* Mostrar el botón "Load More" si showLoadMore es true */}
+
+{showLoadMore && <ButtonLoad request={loadMore}/>} {/* Mostrar el botón "Load More" si showLoadMore es true */}
       
       {modalOpen && <Modal imageUrl={selectedImageUrl} onClose={closeModal} />}
     </div>

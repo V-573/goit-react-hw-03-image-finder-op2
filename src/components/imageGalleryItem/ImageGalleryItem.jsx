@@ -1,12 +1,16 @@
 import React from 'react';
-import {Image } from './imageGalleryItemStyle';
 
-export const ImageGalleryItem = ({source, text, largeImage}) => {
+const ImageGalleryItem = ({ image, handleImageClick }) => {
   return (
-    <li>
-      <Image src={source} alt={text} data-largeimage={largeImage} width='100%'/>
+    <li style={{ margin: '5px' }}>
+      <img
+        src={image.webformatURL}
+        alt="Pixabay"
+        style={{ width: '300px', height: '200px' }}
+        onClick={() => handleImageClick(image.largeImageURL)}
+      />
     </li>
   );
 };
 
-// ImageGalleryItem.jsx
+export default ImageGalleryItem;
